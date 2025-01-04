@@ -26,5 +26,25 @@ public class User extends BaseEntity{
     private Role role;
     private LocalDate registration;
 
+    public String getName () {
+        return name;
+    }
 
+    public String getEmail () {
+        return email;
+    }
+
+    public String getPassword () {
+        return password;
+    }
+
+    public Role getRole () {
+        return role;
+    }
+
+    public LocalDate getRegistration () {
+        return registration;
+    }
+
+    //TODO: Fix getter annotation
 }

@@ -26,4 +26,10 @@ public class Role extends BaseEntity{
     public Role() {
         this.users = new ArrayList<>();
     }
+
+    public String getName () {
+        return name;
+    }
+    //TODO: Fix getter annotation
+
 }
