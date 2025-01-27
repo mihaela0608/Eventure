@@ -44,4 +44,5 @@ spring:
     prefix: file:./src/main/resources/templates/
     resources:
       static-locations: file:./src/main/resources/static/
-      cache-period: 0
+    enabled: true
+    mode: HTML
