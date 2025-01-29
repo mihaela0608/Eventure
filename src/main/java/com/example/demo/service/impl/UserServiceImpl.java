@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registeredUser (UserRegistrationDto userRegistrationDto) {
+    public boolean registerUser (UserRegistrationDto userRegistrationDto) {
         if (userRepository.findByEmail(userRegistrationDto.getEmail()).isPresent()){
             return false;
         }
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
             user.setRole(roleRepository.findByName("ADMIN").get());
         }
         user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+        user.setRegistration(LocalDate.now());
         return user;
     }
 }

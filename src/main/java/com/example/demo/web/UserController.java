@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import com.example.demo.model.dto.UserRegistrationDto;
+import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
+    private final UserService userService;
+
+    public UserController (UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/register")
     public String viewRegister(Model model){
         if (!model.containsAttribute("userData")){
@@ -23,10 +30,16 @@ public class UserController {
         if (bindingResult.hasErrors() || !userData.getPassword().equals(userData.getConfirmPassword())){
             redirectAttributes.addFlashAttribute("userData", userData);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userData", bindingResult);
-            System.out.println();
             return"redirect:/register";
         }
-        return "index";
+        boolean success = userService.registerUser(userData);
+        if (!success){
+            redirectAttributes.addFlashAttribute("userData", userData);
+            redirectAttributes.addFlashAttribute("occupied", true);
+            return "redirect:/register";
+        }
+        return "redirect:/";
+
     }
 
 }
