@@ -8,7 +8,6 @@ import lombok.Setter;
 
 
 @NoArgsConstructor
-@Setter
 public class UserRegistrationDto {
     @NotNull
     @Size(min = 3, max = 20)
@@ -22,6 +21,22 @@ public class UserRegistrationDto {
     @Size(min = 5, max = 20)
     private String password;
     private String confirmPassword;
+
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public void setEmail (String email) {
+        this.email = email;
+    }
+
+    public void setPassword (String password) {
+        this.password = password;
+    }
+
+    public void setConfirmPassword (String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     public String getName () {
         return name;
