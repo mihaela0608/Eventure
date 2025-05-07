@@ -41,5 +41,15 @@ public class UserController {
         return "redirect:/";
 
     }
+    @GetMapping("/login")
+    public String viewLogin(){
+        return "login";
+    }
 
+    @GetMapping("/login-error")
+    public String loginError(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("invalid", true);
+        return "redirect:/login";
+    }
+    // TODO: The text for errors needs changes
 }

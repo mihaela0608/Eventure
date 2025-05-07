@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - Eventure</title>
+  <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #00f0ff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            font-size: 1.2em;
+            color: #ddd;
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .event-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #00f0ff;
+        }
+
+        .event-date {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .event-description {
+            margin-bottom: 20px;
+            color: #eee;
+        }
+
+        .event-actions button {
+            padding: 10px 20px;
+            border: none;
+            background: #00f0ff;
+            color: #000;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .event-actions button:hover {
+            background: #008cc4;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+  <h1>Eventure</h1>
+  <nav>
+    <a href="/profile">Profile</a>
+    <a href="/myevents">My Events</a>
+    <a href="/logout">Log Out</a>
+  </nav>
+</header>
+
+<div class="welcome">
+  <h2>Welcome, <span th:text="${username}">User</span>!</h2>
+  <p>Check out the exciting events around you and get involved!</p>
+</div>
+
+<div class="events-container">
+  <div class="event-card" th:each="event : ${events}">
+    <div class="event-title" th:text="${event.name}">Event Name</div>
+    <div class="event-date" th:text="${event.date}">01.01.2025</div>
+    <div class="event-description" th:text="${event.description}">
+      Description of the event goes here.
+    </div>
+    <div class="event-actions">
+      <button th:href="@{'/events/' + ${event.id}}">See more</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
