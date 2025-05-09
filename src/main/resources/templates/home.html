@@ -120,8 +120,19 @@
   <nav>
     <a href="/profile">Profile</a>
     <a href="/myevents">My Events</a>
-    <a href="/logout">Log Out</a>
-  </nav>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+      <button type="submit" style="
+    background: none;
+    border: none;
+    color: #00f0ff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1em;
+    text-decoration: underline;
+  ">Log Out</button>
+    </form>  </nav>
 </header>
 
 <div class="welcome">
@@ -141,6 +152,7 @@
     </div>
   </div>
 </div>
+
 
 </body>
 </html>

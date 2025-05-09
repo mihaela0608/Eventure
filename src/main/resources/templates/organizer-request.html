@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventure - Apply to Create Events</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #00f0ff;
+        }
+
+        /* Navbar underline effect */
+        nav ul li a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #00f0ff;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 100px 10%;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background: #00f0ff;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        header a:hover {
+            background: #00a0c4;
+            transform: scale(1.1);
+        }
+
+        /* Form Section */
+        section.form-container {
+            padding: 50px 10%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-card h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-card label {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-card input, .form-card textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-card button {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-card button:hover {
+            background-color: #00a0c4;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 10%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        footer p {
+            font-size: 0.9em;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+  <div class="logo">Eventure</div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/events">Events</a></li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/logout">Log Out</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<header>
+  <h1>Apply to Create Events</h1>
+  <p>Fill out the form below to request permission to create your own events. We’ll review your application and get back to you!</p>
+</header>
+
+<!-- Form Section -->
+<section class="form-container">
+  <div class="form-card">
+    <h2>Event Creation Request</h2>
+    <form action="/submit-request" method="POST">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" required>
+
+
+      <label for="eventIdea">Event Idea:</label>
+      <textarea id="eventIdea" name="eventIdea" rows="4" required></textarea>
+
+      <label for="reason">Why do you want to create events on Eventure?</label>
+      <textarea id="reason" name="reason" rows="4" required></textarea>
+
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Eventure. All rights reserved.</p>
+</footer>
+</body>
+</html>
