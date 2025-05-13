@@ -38,7 +38,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("occupied", true);
             return "redirect:/register";
         }
-        return "redirect:/";
+        return "redirect:/login";
 
     }
     @GetMapping("/login")

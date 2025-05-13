@@ -25,6 +25,15 @@ public class User extends BaseEntity{
     @ManyToOne
     private Role role;
     private LocalDate registration;
+    private boolean canCreateEvents;
+
+    public boolean getCanCreateEvents () {
+        return canCreateEvents;
+    }
+
+    public void setCanCreateEvents (boolean canCreateEvents) {
+        this.canCreateEvents = canCreateEvents;
+    }
 
     public String getName () {
         return name;
