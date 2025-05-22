@@ -14,7 +14,17 @@ public class EventRequest extends BaseEntity{
     private String eventIdea;
 
     @Column(nullable = false)
-    String motivation;
+    private String motivation;
+
+    private long userId;
+
+    public long getUserId () {
+        return userId;
+    }
+
+    public void setUserId (long userId) {
+        this.userId = userId;
+    }
 
     public String getFullName () {
         return fullName;
@@ -31,6 +41,7 @@ public class EventRequest extends BaseEntity{
     public void setEventIdea (String eventIdea) {
         this.eventIdea = eventIdea;
     }
+
 
     public String getMotivation () {
         return motivation;
