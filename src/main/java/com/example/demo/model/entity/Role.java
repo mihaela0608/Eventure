@@ -1,13 +1,16 @@
 package com.example.demo.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -15,21 +18,21 @@ import java.util.List;
 @Setter
 public class Role extends BaseEntity{
     private String name;
-    @OneToMany(mappedBy = "role")
-    private List<User> users;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+
+    public Role () {
+        this.users = new HashSet<>();
+    }
 
     public Role(String name) {
         this.name = name;
-        this.users = new ArrayList<>();
     }
 
-    public Role() {
-        this.users = new ArrayList<>();
-    }
+
 
     public String getName () {
         return name;
     }
-    //TODO: Fix getter annotation
 
 }

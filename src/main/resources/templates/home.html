@@ -120,6 +120,9 @@
   <nav>
     <a href="/profile">Profile</a>
     <a href="/myevents">My Events</a>
+    <th:block th:if="${userRole != 'ORGANIZER'}">
+      <a href="/organizer-request">Become Organizer</a>
+    </th:block>
     <form th:action="@{/logout}" method="post" style="display:inline;">
       <button type="submit" style="
     background: none;

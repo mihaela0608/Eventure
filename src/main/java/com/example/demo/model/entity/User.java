@@ -1,13 +1,12 @@
 package com.example.demo.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,17 +21,22 @@ public class User extends BaseEntity{
     private String email;
     @Column(nullable = false)
     private String password;
-    @ManyToOne
-    private Role role;
-    private LocalDate registration;
-    private boolean canCreateEvents;
 
-    public boolean getCanCreateEvents () {
-        return canCreateEvents;
+    private LocalDate registration;
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles () {
+        return roles;
     }
 
-    public void setCanCreateEvents (boolean canCreateEvents) {
-        this.canCreateEvents = canCreateEvents;
+    public void setRoles (Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getName () {
@@ -47,9 +51,6 @@ public class User extends BaseEntity{
         return password;
     }
 
-    public Role getRole () {
-        return role;
-    }
 
     public LocalDate getRegistration () {
         return registration;
@@ -67,9 +68,6 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-    public void setRole (Role role) {
-        this.role = role;
-    }
 
     public void setRegistration (LocalDate registration) {
         this.registration = registration;

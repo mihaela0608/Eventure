@@ -18,6 +18,7 @@ public class AppStartInit implements CommandLineRunner {
         if (roleRepository.count() == 0){
             roleRepository.save(new Role("ADMIN"));
             roleRepository.save(new Role("USER"));
+            roleRepository.save(new Role("ORGANIZER"));
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.dto.UserRegistrationDto;
+import com.example.demo.model.entity.Role;
 import com.example.demo.model.entity.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,12 +40,17 @@ public class UserServiceImpl implements UserService {
 
     private User getUser (UserRegistrationDto userRegistrationDto) {
         User user = modelMapper.map(userRegistrationDto, User.class);
-        user.setRole(roleRepository.findByName("USER").get());
-        if (userRepository.count() == 0){
-            user.setRole(roleRepository.findByName("ADMIN").get());
-        }
         user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         user.setRegistration(LocalDate.now());
+        Set<Role> roles = new HashSet<>();
+
+        if (userRepository.count() == 0) {
+            roles.add(roleRepository.findByName("ADMIN").get());
+        } else {
+            roles.add(roleRepository.findByName("USER").get());
+        }
+
+        user.setRoles(roles);
         return user;
     }
 }
