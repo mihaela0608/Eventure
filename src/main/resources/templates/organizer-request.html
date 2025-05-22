@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -224,19 +224,22 @@
 <section class="form-container">
   <div class="form-card">
     <h2>Event Creation Request</h2>
-    <form action="/submit-request" method="POST">
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" name="fullName" required>
+    <form th:action="@{/organizer-request}" th:object="${eventRequest}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <div th:if="${error}" class="error" >There should not be empty space</div>
 
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" th:field="*{fullName}" required>
 
       <label for="eventIdea">Event Idea:</label>
-      <textarea id="eventIdea" name="eventIdea" rows="4" required></textarea>
+      <textarea id="eventIdea" th:field="*{eventIdea}" rows="4" required></textarea>
 
-      <label for="reason">Why do you want to create events on Eventure?</label>
-      <textarea id="reason" name="reason" rows="4" required></textarea>
+      <label for="motivation">Why do you want to create events on Eventure?</label>
+      <textarea id="motivation" th:field="*{motivation}" rows="4" required></textarea>
 
       <button type="submit">Submit Request</button>
     </form>
+
   </div>
 </section>
 

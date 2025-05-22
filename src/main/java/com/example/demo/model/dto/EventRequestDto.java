@@ -1,16 +1,17 @@
 package com.example.demo.model.dto;
 
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class EventRequestDto {
-    @NotNull
+    @NotEmpty
     private String fullName;
 
-    @NotNull
+    @NotEmpty
     private String eventIdea;
 
-    @NotNull
+    @NotEmpty
     private String motivation;
 
     public String getFullName () {
